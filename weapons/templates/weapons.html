@@ -1,9 +1,43 @@
-<h1>My Weapons Inventory</h1>
+{% extends 'base.html' %}
 
-<h5>Name: {{name}}</h5>
-<h5>Atk: {{atk}}</h5>
-<h5>Amount: {{amount}}</h5>
-<h5>Crit Dmg: {{critdmg}}</h5>
-<h5>Crit Rate: {{critrate}}</h5>
-<h5>Desc: {{description}}</h5>
+{% block content %}
+    <h1>My Weapons Inventory</h1>
 
+    <h4>Name: {{name}} Class: {{kelas}} NPM: {{npm}}</h4>
+
+    <p>You Have Stored {{weapons_total}} Weapons in Your Inventory</p>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Atk</th>
+            <th>Critdmg</th>
+            <th>Critrate</th>
+            <th>Description</th>
+        </tr>
+
+        {% comment %} Berikut cara memperlihatkan data weapons di bawah baris ini {% endcomment %}
+
+        {% for weapon in weapons %}
+            <tr>
+                <td>{{weapon.name}}</td>
+                <td>{{weapon.amount}}</td>
+                <td>{{weapon.atk}}</td>
+                <td>{{weapon.critdmg}}</td>
+                <td>{{weapon.critrate}}</td>
+                <td>{{weapon.description}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <br />
+
+    <a href="{% url 'weapons:add_weapons' %}">
+        <button>
+            Add New Weapons
+        </button>
+    </a>
+
+
+    
+{% endblock content %}

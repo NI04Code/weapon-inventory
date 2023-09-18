@@ -13,12 +13,6 @@ class mainTest(TestCase):
     def test_html_content(self):
         response = Client().get('/weapons/')
         self.assertContains(response, "<h1>My Weapons Inventory</h1>", html=True)
-        self.assertContains(response, "<h5>Name: Iron Sword</h5>", html=True)
-        self.assertContains(response, "<h5>Atk: 5</h5>", html=True)
-        self.assertContains(response, "<h5>Amount: 1</h5>", html=True)
-        self.assertContains(response, "<h5>Crit Dmg: 80.3</h5>", html=True)
-        self.assertContains(response, "<h5>Crit Rate: 18.9</h5>", html=True)
-        self.assertContains(response, "<h5>Desc: Basic sword made of iron</h5>", html=True)
 
         
         
