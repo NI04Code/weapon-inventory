@@ -1,49 +1,57 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>My Weapons Inventory</h1>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Weapon Inventory</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="{% url 'weapons:logout' %}">
+                            <button class="btn btn-outline-danger my-2 my-sm-0" type="button" id="logoutButton">Logout</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <span class="navbar-text me-3">
+                Sesi terakhir login: {{ last_login }}
+            </span>
+        </div>
+    </nav>
 
-    <h4>Name: {{name}} Class: {{kelas}} NPM: {{npm}}</h4>
 
-    <p>You Have Stored {{weapons_total}} Weapons in Your Inventory</p>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Atk</th>
-            <th>Critdmg</th>
-            <th>Critrate</th>
-            <th>Description</th>
-        </tr>
-
-        {% comment %} Berikut cara memperlihatkan data weapons di bawah baris ini {% endcomment %}
-
-        {% for weapon in weapons %}
-            <tr>
-                <td>{{weapon.name}}</td>
-                <td>{{weapon.amount}}</td>
-                <td>{{weapon.atk}}</td>
-                <td>{{weapon.critdmg}}</td>
-                <td>{{weapon.critrate}}</td>
-                <td>{{weapon.description}}</td>
-            </tr>
-        {% endfor %}
-    </table>
-
-    <br />
-
-    <a href="{% url 'weapons:add_weapons' %}">
-        <button>
-            Add New Weapons
-        </button>
-    </a>
-
-    <a href="{% url 'weapons:logout' %}">
-        <button>
-            Logout
-        </button>
-    </a>
     
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h5 class="mb-3">{{name}} Weapons Inventory</h5>
+                <p>You have stored {{ weapons_total }} Weapons in your inventory.</p>
+    
+                {% for weapon in weapons %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ weapon.name }}</h5>
+                        <p class="card-text">
+                            <strong>Amount:</strong> {{ weapon.amount }}<br>
+                            <strong>Atk:</strong> {{ weapon.atk }}<br>
+                            <strong>Critdmg:</strong> {{ weapon.critdmg }}<br>
+                            <strong>Critrate:</strong> {{ weapon.critrate }}<br>
+                            <strong>Description:</strong> {{ weapon.description }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+    
+                <a href="{% url 'weapons:add_weapons' %}" class="btn btn-primary">Add New Weapon</a>
+            </div>
+        </div>
+    </div>
+    
+    
+
     
 {% endblock content %}

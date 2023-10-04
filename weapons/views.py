@@ -38,6 +38,8 @@ def add_weapons(request):
     context = {'form': form}
     return render(request, "add_weapons.html", context)
 
+
+
 def register(request):
     form = UserCreationForm()
 

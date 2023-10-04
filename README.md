@@ -345,5 +345,214 @@ Dalam rangka menjaga keamanan pengguna dan data mereka, penting untuk mengimplem
    2. Pada fungsi show_weapons didalam context saya menambahkan `'last_login': request.COOKIES['last_login']` untuk mendapatkan informasi terakhir login user.
    3. Pada fungsi login_user dibawah `if user is not None:` saya menambahkan `response.set_cookie('last_login', str(datetime.datetime.now()))`, tujuannya untuk menambahkan cookies ketika user berhasil login.
    3. pada fungsi logout_user saya menambahkan `response.delete_cookie('last_login')` untuk menghapus cookie ketika user melakukan logout.
-   4. Tidak lupa saya menambahkan code html untuk menampilkan sesi terakhir login yang ada pada context.
+   4. Tidak lupa saya menambahkan code html untuk menampilkan sesi terakhir login yang ada pada context.    
+
+
+----------------
+**PBP Tugas 5**   
+
+**Jelaskan manfaat dari setiap element selector dan kapan waktu yang tepat untuk menggunakannya.**
+
+
+1. **Element Selector**:
+   - **Penggunaan**: Menggunakan tipe elemen HTML (seperti `p`, `h1`, `div`) sebagai selector.
+   - **Kapan Menggunakan**: Element selector digunakan ketika kita ingin mengatur gaya untuk semua elemen dengan tipe yang sama di seluruh halaman web.
+   - **Contoh**: 
+     ```css
+     p {
+       color: blue;
+       font-size: 16px;
+     }
+     ```
+     Ini akan mengubah warna dan ukuran teks untuk semua elemen `<p>` di halaman.
+
+2. **ID Selector**:
+   - **Penggunaan**: Menggunakan atribut `id` pada elemen sebagai selector (dengan format `#namaId`).
+   - **Kapan Menggunakan**: ID selector digunakan ketika kita ingin mengganti gaya elemen tertentu yang memiliki ID unik.
+   - **Contoh**: 
+     ```css
+     #header {
+       background-color: gray;
+       font-weight: bold;
+     }
+     ```
+     Ini akan mengubah latar belakang dan tebal teks untuk elemen dengan ID "header".
+
+3. **Class Selector**:
+   - **Penggunaan**: Menggunakan atribut `class` pada elemen sebagai selector (dengan format `.namaClass`).
+   - **Kapan Menggunakan**: Class selector digunakan ketika kita ingin mengatur gaya untuk beberapa elemen yang memiliki class yang sama.
+   - **Contoh**: 
+     ```css
+     .highlight {
+       background-color: yellow;
+       color: black;
+     }
+     ```
+     Ini akan mengubah latar belakang dan warna teks untuk semua elemen yang memiliki class "highlight".
+
+**Jelaskan HTML5 Tag yang kamu ketahui.**
+
+
+1. `<header>`: Digunakan untuk mengelompokkan elemen-elemen pembukaan halaman web, biasanya berisi logo, judul, navigasi, atau elemen header lainnya.
+
+2. `<nav>`: Menunjukkan bagian yang berisi navigasi situs web seperti menu atau tautan ke halaman lain.
+
+3. `<section>`: Digunakan untuk mengelompokkan konten yang terkait secara tematis dalam halaman web.
+
+4. `<article>`: Menandakan konten yang independen dan dapat berdiri sendiri, seperti berita, blog post, atau artikel.
+
+5. `<main>`: Menunjukkan konten utama dalam halaman web yang biasanya berada di dalam elemen `<body>`.
+
+6. `<aside>`: Digunakan untuk mengelompokkan konten sampingan atau tambahan yang terkait dengan konten utama.
+
+7. `<footer>`: Berisi informasi penutup atau footer halaman web, seperti informasi kontak atau tautan ke halaman terkait.
+
+8. `<figure>` dan `<figcaption>`: `<figure>` digunakan untuk mengelompokkan konten media seperti gambar, audio, atau video, sementara `<figcaption>` berisi deskripsi atau keterangan untuk elemen media tersebut.
+
+9. `<video>` dan `<audio>`: Digunakan untuk menampilkan konten video atau audio di halaman web.
+
+10. `<canvas>`: Memberikan area tempat kita dapat menggambar grafis, membuat animasi, atau melakukan manipulasi gambar dengan JavaScript.
+
+11. `<input type="email">`, `<input type="date">`, dsb.: Berbagai jenis elemen input yang dirancang khusus untuk jenis data tertentu seperti email, tanggal, atau angka.
+
+12. `<mark>`: Digunakan untuk menyorot atau menandai teks dalam sebuah dokumen.
+
+13. `<details>` dan `<summary>`: `<details>` digunakan untuk mengelompokkan konten yang dapat dibuka atau ditutup, sementara `<summary>` adalah teks yang digunakan untuk mengendalikan tampilan elemen tersebut.
+
+
+**Jelaskan perbedaan antara margin dan padding.**
+
+
+1. **Margin**:
+   - **Margin** adalah jarak antara elemen dengan elemen lain di sekitarnya (atau elemen lain di luar kontainer jika itu elemen terluar).
+   - Margin mengatur jarak elemen dari elemen lain di luar elemen tersebut.
+   - Margin tidak memiliki latar belakang atau warna, hanya memengaruhi jarak di sekitar elemen.
+   - Margin bersifat transparan; elemen di bawahnya bisa terlihat melalui margin.
+
+   Contoh:
+   ```css
+   .box {
+       margin: 10px;
+   }
+   ```
+   Ini akan menambahkan margin 10 piksel di sekitar elemen dengan class "box".
+
+2. **Padding**:
+   - **Padding** adalah jarak antara konten elemen dan batas elemen itu sendiri (border jika ada, atau tepi elemen jika tidak ada border).
+   - Padding mengatur ruang di antara konten elemen dan tepi elemen itu sendiri.
+   - Padding bisa memiliki latar belakang dan warna, sehingga bisa terlihat sebagai area di dalam elemen.
+   - Padding tidak bersifat transparan; elemen di bawahnya tidak akan terlihat melalui padding.
+
+   Contoh:
+   ```css
+   .box {
+       padding: 10px;
+   }
+   ```
+   Ini akan menambahkan padding 10 piksel di dalam elemen dengan class "box", di antara konten dan tepi elemen.
+
+
+**Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?**   
+
+**Perbedaan antara Tailwind CSS dan Bootstrap**:
+
+1. **Pendekatan Desain**:
+   - **Tailwind CSS**: Merupakan framework CSS utility-first yang memberikan sejumlah besar kelas CSS yang dapat digunakan langsung di HTML untuk mengatur tampilan elemen. Ini memungkinkan pengembang untuk merancang tampilan yang sangat kustom dengan lebih fleksibel.
+   - **Bootstrap**: Merupakan framework CSS komprehensif yang memberikan komponen UI dan gaya pra-didesain. Bootstrap memiliki desain yang lebih terstruktur dan konsisten.
+
+2. **Customization**:
+   - **Tailwind CSS**: Memungkinkan kustomisasi yang tinggi dengan mudah mengganti konfigurasi kelas CSS sesuai kebutuhan. kita dapat merancang tampilan yang sangat unik.
+   - **Bootstrap**: Memiliki desain yang sudah ada dan memerlukan lebih banyak penyesuaian untuk membuat tampilan yang sangat berbeda.
+
+3. **Ukuran**:
+   - **Tailwind CSS**: Lebih ringan dalam hal ukuran karena hanya menghasilkan CSS yang digunakan benar-benar.
+   - **Bootstrap**: Lebih besar dalam hal ukuran karena termasuk banyak komponen dan gaya yang mungkin tidak digunakan sepenuhnya.
+
+4. **Sintaks**:
+   - **Tailwind CSS**: Menggunakan kelas CSS langsung dalam HTML, yang dapat menjadi tidak semantik dan lebih sulit dibaca oleh beberapa pengembang.
+   - **Bootstrap**: Menggunakan kelas CSS dalam HTML tetapi dengan pendekatan yang lebih terstruktur.
+
+**Kapan Menggunakan Bootstrap atau Tailwind CSS**:
+
+- **Bootstrap**: Sebaiknya digunakan jika kita perlu cepat membangun situs web dengan tampilan yang cukup konsisten dan kita tidak ingin melakukan banyak kustomisasi desain. Bootstrap cocok untuk proyek yang membutuhkan komponen UI yang sudah ada dan waktu pengembangan yang singkat.
+
+- **Tailwind CSS**: Sebaiknya digunakan jika kita ingin memiliki kendali yang lebih besar atas desain tampilan, membangun tampilan yang sangat kustom, dan memiliki kemampuan untuk menyesuaikan setiap aspek tampilan dengan lebih detail. Tailwind cocok untuk pengembang yang ingin merancang tampilan yang sangat spesifik dan unik.
+
+
+**Step by Step**  
+
+**Login Page**
+
+1. Saya menggunakan `<div class="container mt-5">` untuk membungkus konten saya
+
+2. Dalam `<div class="row justify-content-center">`, saya menggunakan `justify-content-center` untuk membuat baris dengan konten yang terpusat secara horizontal. Kemudian, dalam `<div class="col-md-4">`, saya menggunakan kolom Bootstrap untuk mengatur lebar konten.
+
+3. Saya membuat sebuah card dengan class `card`.
+
+4. Di dalam card, saya memiliki bagian header card dengan class `card-header`. Saya juga menggunakan class `text-center` untuk mengatur teksnya menjadi terpusat secara horizontal.
+
+5. Di dalam card, ada bagian body (`<div class="card-body">`) yang berisi form login. Saya menggunakan class `p-3` untuk memberikan padding ke body card, dan `text-center` untuk mengatur teks menjadi terpusat.
+
+6. Saya memberikan Tombol "Login" yang dibuat dengan class `btn btn-primary btn-block` untuk memberikan tampilan tombol Bootstrap yang berwarna biru dan memenuhi lebar card.
+
+7. Saya menggunakan `{% if messages %}` untuk menampilkan pesan-pesan Django (misalnya, kesalahan login) dan mengulanginya dengan `{% for message in messages %}`. Pesan-pesan ini diwarnai merah menggunakan class `text-danger`.
+
+8. Di bagian bawah card, saya memiliki bagian footer dengan tautan ke halaman register. Saya menggunakan class `card-footer` dan tautan HTML `<a>`.
+
+
+**Register Page**
+
+1. Saya menggunakan `<div class="container mt-5">` untuk membungkus konten dalam tata letak yang responsif dengan margin atas sebesar 5 satuan (unit) dari Bootstrap.
+
+2. Dalam `<div class="row justify-content-center">`, saya menggunakan `justify-content-center` untuk membuat baris dengan konten yang terpusat secara horizontal. Kemudian, dalam `<div class="col-md-6">`, saya menggunakan kolom Bootstrap dengan lebar medium (medium-sized column) untuk mengatur lebar konten.
+
+3. Saya membuat sebuah card dengan class `card` yang merupakan komponen Bootstrap yang digunakan untuk mengelompokkan konten.
+
+4. Di dalam card, ada bagian body (`<div class="card-body">`) yang berisi form pendaftaran. Saya menggunakan class `p-5` untuk memberikan padding besar ke dalam card body dan `text-center` untuk mengatur teks menjadi terpusat.
+
+5. Saya menampilkan teks "Register" berelemen `<h1>` dengan judul card dengan class `card-title`.
+
+6. Saya membuat form HTML dengan `<form>` dan menggunakan `{% csrf_token %}` untuk menambahkan token keamanan Django. Saya menggunakan tabel Bootstrap dengan class `table` untuk mengatur form menggunakan `{{ form.as_table }}`.
+
+7. Tombol "Register" dibuat dengan class `btn btn-primary btn-block` untuk memberikan tampilan tombol Bootstrap yang berwarna biru dan memenuhi lebar card.
+
+8. Di bawah form, saya menampilkan pesan-pesan Django menggunakan `{% if messages %}` dan mengulanginya dengan `{% for message in messages %}`. Pesan-pesan ini ditampilkan dalam elemen `<div>` dengan class `alert alert-primary` yang memberikan latar belakang biru dan teks putih.    
+
+    
+**add_weapons**
+
+
+1. Saya menggunakan `<div class="container mt-5">` untuk membungkus konten dalam tata letak yang responsif sama seperti login dan register page.
+
+2. Dalam `<div class="row justify-content-center">`, saya menggunakan `justify-content-center` untuk membuat baris dengan konten yang terpusat secara horizontal. Kemudian, dalam `<div class="col-md-6">`, saya menggunakan kolom Bootstrap dengan lebar medium (medium-sized column) untuk mengatur lebar konten.
+
+3. Saya membuat sebuah card dengan class `card` yang merupakan komponen Bootstrap yang digunakan untuk mengelompokkan konten.
+
+4. Di dalam card, ada bagian body (`<div class="card-body">`) yang berisi form untuk menambahkan senjata baru. Saya menggunakan class `p-5` untuk memberikan padding besar ke dalam card body dan `text-center` untuk mengatur teks menjadi terpusat.
+
+5. Saya memiliki judul card dengan class `card-title` yang ditampilkan sebagai elemen `<h1>` dengan teks "Add New Weapons".
+
+6. Saya membuat form HTML dengan `<form>` dan menggunakan `{% csrf_token %}` untuk menambahkan token keamanan Django. Saya menggunakan tabel Bootstrap dengan class `table` untuk mengatur form menggunakan `{{ form.as_table }}`.
+
+7. Tombol "Add Weapons" dibuat dengan class `btn btn-primary btn-block` untuk memberikan tampilan tombol Bootstrap yang berwarna biru dan memenuhi lebar card.
+
+
+**weapons**
+
+1. Saya menggunakan `<div class="container mt-5">` untuk membungkus konten dalam tata letak yang responsif dengan margin atas sebesar 5 satuan (unit) dari Bootstrap.
+
+2. Dalam `<div class="row justify-content-center">`, saya menggunakan `justify-content-center` untuk membuat baris dengan konten yang terpusat secara horizontal. Kemudian, dalam `<div class="col-md-8">`, saya menggunakan kolom Bootstrap dengan lebar medium (medium-sized column) untuk mengatur lebar konten.
+
+3. Saya menampilkan judul dengan tag `<h5>` yang menggabungkan variabel `name` dari konteks yang saya punya. Misalnya, jika `name` adalah "My", maka judulnya akan menjadi "My Weapons Inventory".
+
+4. Saya menampilkan informasi inventori menggunakan elemen `<p>`, dengan jumlah senjata yang disimpan dalam variabel `weapons_total`.
+
+5. Saya menggunakan perulangan `{% for weapon in weapons %}` untuk melakukan loop daftar senjata.
+
+6. Untuk setiap senjata, saya membuat sebuah card dengan class `card`.
+
+7. Di dalam card, ada bagian body card (`<div class="card-body">`) yang menampilkan detail senjata seperti nama, jumlah, serangan, kerusakan kritikal, dan lainnya dengan menggunakan variabel dari konteks Anda.
+
+8. Di bagian bawah halaman, saya menambahkan tautan "Add New Weapon" yang mengarah ke URL untuk menambahkan senjata baru dengan menggunakan class `btn btn-primary` dari Bootstrap.
+
 
