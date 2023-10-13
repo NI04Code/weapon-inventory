@@ -30,28 +30,104 @@
             <div class="col-md-8">
                 <h5 class="mb-3">{{name}} Weapons Inventory</h5>
                 <p>You have stored {{ weapons_total }} Weapons in your inventory.</p>
-    
-                {% for weapon in weapons %}
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ weapon.name }}</h5>
-                        <p class="card-text">
-                            <strong>Amount:</strong> {{ weapon.amount }}<br>
-                            <strong>Atk:</strong> {{ weapon.atk }}<br>
-                            <strong>Critdmg:</strong> {{ weapon.critdmg }}<br>
-                            <strong>Critrate:</strong> {{ weapon.critrate }}<br>
-                            <strong>Description:</strong> {{ weapon.description }}
-                        </p>
-                    </div>
-                </div>
-                {% endfor %}
-    
+
+                <div class="row" id="weapons_list"></div>
+
                 <a href="{% url 'weapons:add_weapons' %}" class="btn btn-primary">Add New Weapon</a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Weapon by AJAX</button>
             </div>
         </div>
     </div>
     
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Weapons</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="atk" class="col-form-label">Atk:</label>
+                            <input type="number" class="form-control" id="atk" name="atk"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="critdmg" class="col-form-label">Critdmg:</label>
+                            <input type="number" class="form-control" id="critdmg" name="critdmg"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="critrate" class="col-form-label">Critrate:</label>
+                            <input type="number" class="form-control" id="critrate" name="critrate"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Weapon</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
+    <script>
+        async function getWeapons() {
+            return fetch("{% url 'weapons:get_weapon_json' %}").then((res) => res.json())
+        }
+
+        async function refreshWeapons() {
+            document.getElementById("weapons_list").innerHTML = ""
+            const weapons = await getWeapons()
+            let htmlString = ``
+            weapons.forEach((weapon) => {
+                htmlString += `\n
+            <div class="col-md-6">
+                <div class=" card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">${ weapon.fields.name }</h5>
+                        <p class="card-text">
+                            <strong>Amount:</strong> ${ weapon.fields.amount }<br>
+                            <strong>Atk:</strong> ${ weapon.fields.atk }<br>
+                            <strong>Critdmg:</strong> ${ weapon.fields.critdmg }<br>
+                            <strong>Critrate:</strong> ${ weapon.fields.critrate } <br>
+                            <strong>Description:</strong> ${ weapon.fields.description } <br>
+                        </p>
+                    </div>
+                </div>
+            </div>` 
+            })
+            
+            document.getElementById("weapons_list").innerHTML = htmlString
+
+            function addWeapon() {
+                fetch("{% url 'weapons:add_weapon_ajax' %}", {
+                    method: "POST",
+                    body: new FormData(document.querySelector('#form'))
+                }).then(refreshWeapons)
+        
+                document.getElementById("form").reset()
+                return false
+            }
+            document.getElementById("button_add").onclick = addWeapon
+
+        }
     
+        refreshWeapons()
+
+    </script>
 {% endblock content %}

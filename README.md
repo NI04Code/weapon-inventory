@@ -337,7 +337,7 @@ Dalam rangka menjaga keamanan pengguna dan data mereka, penting untuk mengimplem
 
 3. **Menghubungkan model Item dengan User.**
    1. Saya melakukan import `User` pada `models.py` lalu menambahkan `user = models.ForeignKey(User, on_delete=models.CASCADE)` pada class Weapon untuk mengasosiasikan satu produk dengan satu user.
-   2. lalu pada fungsi add_weapons pada `views.py` saya menambahkan `weapons = form.save(commit=False)`, commit false disini bertujuan agar data tidak langsung dipush ke databases. Setelah itu saya menambahkan `product.user = request.user` untuk menandakan bahwa weapons yang di add sesuai dengan user yang bersangkutan.
+   2. lalu pada fungsi add_weapons pada `views.py` saya menambahkan `weapons = form.save(commit=False)`, commit false disini bertujuan agar data tidak langsung dipush ke databases. Setelah itu saya menambahkan `weapon.user = request.user` untuk menandakan bahwa weapons yang di add sesuai dengan user yang bersangkutan.
    
 
 4. **Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.**
@@ -551,8 +551,94 @@ Dalam rangka menjaga keamanan pengguna dan data mereka, penting untuk mengimplem
 
 6. Untuk setiap senjata, saya membuat sebuah card dengan class `card`.
 
-7. Di dalam card, ada bagian body card (`<div class="card-body">`) yang menampilkan detail senjata seperti nama, jumlah, serangan, kerusakan kritikal, dan lainnya dengan menggunakan variabel dari konteks Anda.
+7. Di dalam card, ada bagian body card (`<div class="card-body">`) yang menampilkan detail senjata seperti nama, jumlah, serangan, kerusakan kritikal, dan lainnya dengan menggunakan variabel dari konteks kita.
 
 8. Di bagian bawah halaman, saya menambahkan tautan "Add New Weapon" yang mengarah ke URL untuk menambahkan senjata baru dengan menggunakan class `btn btn-primary` dari Bootstrap.
 
 
+
+----------------
+**PBP Tugas 6**
+
+**Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.**
+
+**Synchronous Programming (Pemrograman Sinkron):**
+1. Dalam pemrograman sinkron, tugas-tugas atau operasi-operasi dieksekusi satu per satu secara berurutan.
+2. Ketika satu tugas sedang berjalan, eksekusi program akan terhenti dan menunggu tugas tersebut selesai sebelum melanjutkan ke tugas selanjutnya.
+3. Pemrograman sinkron cocok untuk tugas-tugas yang bersifat sederhana dan tidak memerlukan pengelolaan waktu eksekusi yang rumit.
+4. Synchronous programming bisa membuat program menjadi lebih mudah dipahami karena urutan eksekusi yang jelas.
+
+**Asynchronous Programming (Pemrograman Asinkron):**
+1. Dalam pemrograman asinkron, tugas-tugas atau operasi-operasi dieksekusi secara bersamaan atau secara paralel tanpa harus menunggu tugas sebelumnya selesai.
+2. Pemrograman asinkron sangat berguna ketika kita memiliki tugas yang memerlukan waktu eksekusi yang lama.
+3. Dalam pemrograman asinkron, kita menggunakan konsep callback, promise, atau async/await untuk mengelola tugas yang bersifat asinkron.
+4. Asynchronous programming lebih efisien karena program tidak perlu menunggu tugas yang memerlukan waktu lama selesai sebelum melanjutkan tugas lain.
+
+Perbedaan utama antara keduanya adalah dalam cara penanganan tugas dan operasi. Pemrograman sinkron cocok untuk kasus sederhana di mana urutan eksekusi tidak masalah. Sementara itu, pemrograman asinkron lebih sesuai ketika kita perlu menangani banyak tugas bersamaan atau tugas yang memerlukan waktu lama tanpa menghentikan program secara keseluruhan.
+
+**Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.**
+
+Pemrograman berbasis event atau event-driven programming adalah paradigma pemrograman di mana eksekusi program dipicu oleh peristiwa atau kejadian tertentu yang terjadi dalam sistem atau lingkungan program. Alih-alih menjalankan tugas secara berurutan, program menunggu dan merespons peristiwa-peristiwa tertentu yang terjadi, seperti klik tombol, input pengguna, atau permintaan jaringan. Paradigma ini memungkinkan program untuk menjalankan tugas secara asinkron, sesuai dengan peristiwa yang terjadi, tanpa harus menghentikan eksekusi program secara keseluruhan.
+
+Contoh penerapannya pada tugas ini ada pada tombol add new weapons
+ketika pengguna mengklik tombol "Add new weapon" event handler akan menjalankan permintaan AJAX dengan FETCH API yang mengirimkan request ke server melalui views:add_weapon_ajax
+ 
+**Jelaskan penerapan asynchronous programming pada AJAX.**  
+
+Berikut beberapa penerapan asynchronous programming pada AJAX
+
+1. **Permintaan AJAX Asynchronous**: Ketika kita menggunakan AJAX untuk mengirim permintaan ke server, kita mengatur permintaan tersebut sebagai asynchronous (asinkron). Ini berarti bahwa program kita akan melanjutkan eksekusi segera setelah permintaan AJAX dikirim, tanpa harus menunggu respons dari server. Ini memungkinkan kita untuk tetap responsif terhadap peristiwa lain yang terjadi di aplikasi.
+
+2. **Event Handling**: Kita menggunakan event handlers dalam JavaScript untuk menangani respons dari server ketika permintaan AJAX selesai. Kita mendefinisikan event handler yang akan dijalankan ketika respons diterima, seperti ketika data telah diambil dari server atau ketika ada kesalahan dalam permintaan.
+
+3. **Callback Functions**: Kita seringkali menggunakan callback functions dalam asynchronous programming. Callback functions adalah fungsi yang akan dijalankan setelah tugas tertentu selesai. Dalam konteks AJAX, kita dapat menggunakan callback functions untuk menangani respons dari server dan memproses data yang diterima.
+
+4. **Non-Blocking**: Salah satu aspek penting dari asynchronous programming adalah non-blocking. Ini berarti bahwa program kita tetap dapat menjalankan tugas-tugas lain saat menunggu respons dari server. Ini memungkinkan aplikasi kita tetap responsif dan tidak membeku selama permintaan AJAX sedang berlangsung.
+
+Penerapan asynchronous programming pada AJAX memungkinkan kita untuk membuat aplikasi web yang interaktif dan responsif.
+
+**Pada PBP kali ini, penerapan AJAX dilakukan dengan menggunakan Fetch API daripada library jQuery. Bandingkanlah kedua teknologi tersebut dan tuliskan pendapat kamu teknologi manakah yang lebih baik untuk digunakan.**
+
+
+**Penggunaan Fetch API:**
+1. **Vanilla JavaScript**: Fetch API adalah bagian dari JavaScript yang lebih murni (vanilla) daripada jQuery. Kita dapat menggunakan Fetch API langsung dalam JavaScript tanpa perlu mengimpor perpustakaan tambahan.
+
+2. **Promise-Based**: Fetch API adalah promise-based, yang berarti kita dapat menggunakan async/await atau `.then()` untuk menangani respons. Ini membuat kode lebih bersih dan lebih mudah dipahami.
+
+3. **Mendukung JSON secara Langsung**: Fetch API secara bawaan mendukung pertukaran data dalam format JSON dengan menggunakan metode `.json()`. Hal ini memudahkan dalam pengambilan dan pemrosesan data JSON dari server.
+
+4. **Lebih Ringan**: Fetch API lebih ringan dari segi ukuran dan overhead daripada jQuery. Ini dapat menghasilkan waktu pemuatan yang lebih cepat pada aplikasi web.
+
+**Penggunaan jQuery:**
+1. **Sintaks yang Lebih Pendek**: jQuery sering menggunakan sintaks yang lebih pendek dan mudah digunakan untuk melakukan operasi AJAX. Ini membuatnya lebih cepat dan mudah digunakan, terutama untuk pemula.
+
+2. **Cross-Browser Compatibility**: jQuery mengatasi masalah kompatibilitas peramban (cross-browser) dan memastikan bahwa kode AJAX berfungsi dengan baik di berbagai peramban. Ini mengurangi kerumitan penanganan perbedaan antara peramban.
+
+3. **Banyak Fungsi Bawaan**: jQuery menyediakan banyak fungsi bawaan untuk AJAX, seperti `$.get()`, `$.post()`, dan `$.ajax()`, yang mempermudah penanganan permintaan dan respons.
+
+4. **Plugin dan Ekosistem**: jQuery memiliki banyak plugin dan ekstensi yang dapat digunakan untuk pengembangan web. Ini dapat mempercepat pengembangan aplikasi dengan menambahkan fitur-fitur yang sudah jadi.
+
+5. **Kompatibel dengan Versi Lama**: jQuery tetap mendukung peramban lama, yang dapat berguna jika kita harus merancang aplikasi web yang harus berjalan di peramban lama.
+
+Pilihan antara Fetch API dan jQuery dalam penerapan AJAX tergantung pada kebutuhan dan preferensi kita. Fetch API lebih modern, bersih, dan efisien untuk penggunaan dasar, sementara jQuery masih relevan terutama jika kita berurusan dengan peramban lama atau ingin pengembangan cepat dengan sintaks yang lebih pendek.
+
+
+**Step by Step**   
+
+1. **AJAX GET**
+
+   1. Seperti pada tutorial saya membuat script js pada weapons.html
+   2. Pada script saya menambahkan asynchronous function `getWeapons()` untuk mendapatkan data weapons dalam bentuk json
+   3. Selanjutnya saya menambahkan asynchronous function `refreshWeapons()` untuk mengubah tampilan weapons.html setiap kali ada perubahan yang terjadi, dalam hal ini ketika menambahkan weapons baru.
+   4. pada `refreshWeapons()` saya menaruh semua code html cards saya dalam htmlString yang mana nanti akan otomatis terupdate di dalam html tag yang memiliki id `weapons_list`  dengan innerHTML
+
+2. **AJAX POST**
+
+   1. Saya menambahkan tombol `Add Weapon by AJAX` yang akan membuka modal ketika diklik.
+   2. Setelahnya saya membuat function pada `views.py` bernama `add_weapon_ajax` yang berfungsi untuk mendapatkan semua fields dari forms dan membuat object weapon baru dari fields tersebut, tidak lupa untuk menambahkan function ini kedalam `urls.py`
+   3. Lalu saya membuat modal yang mirip dengan tutorial dengan beberapa penambahan input sesuai dengan field forms yang saya miliki.
+   4. Setelah itu saya menambahkan function `addWeapon` di dalam asynchronous function `refreshWeapons()` yang berfungsi untuk menambahkan product dengan fungsi `add_weapon_ajax` pada `views.py`.
+   5. Fungsi ini saya hubungkan dengan button add Weapon yang berada pada modal dengan syntax `document.getElementById("button_add").onclick = addWeapon` sehingga apabila button add Weapon diklik maka `add_weapon_ajax` akan dipanggil dan weapons.html langsung refresh dan terupdate melalui `refreshWeapons()`
+   6. Setelah semua sudah selesai saya melakukan `python3 manage.py collectstatic` untuk mengumpulkan semua static file dalam folder static untuk deployment.
+
+   
