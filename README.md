@@ -641,4 +641,7 @@ Pilihan antara Fetch API dan jQuery dalam penerapan AJAX tergantung pada kebutuh
    5. Fungsi ini saya hubungkan dengan button add Weapon yang berada pada modal dengan syntax `document.getElementById("button_add").onclick = addWeapon` sehingga apabila button add Weapon diklik maka `add_weapon_ajax` akan dipanggil dan weapons.html langsung refresh dan terupdate melalui `refreshWeapons()`
    6. Setelah semua sudah selesai saya melakukan `python3 manage.py collectstatic` untuk mengumpulkan semua static file dalam folder static untuk deployment.
 
+
+-----
+
    
