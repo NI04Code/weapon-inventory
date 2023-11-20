@@ -11,4 +11,6 @@ class Weapon(models.Model):
     critdmg = models.FloatField()
     critrate = models.FloatField()
     description = models.TextField()
+
+
     
