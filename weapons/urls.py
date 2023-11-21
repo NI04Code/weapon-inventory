@@ -15,4 +15,5 @@ urlpatterns = [
     path('json/<int:id>/', show_json_by_id, name='show_json_by_id'), 
     path('get-weapons/', get_weapons_json, name='get_weapon_json'),
     path('create-weapon-ajax/', add_weapon_ajax, name='add_weapon_ajax'),
+    path('create-flutter/', create_product_flutter, name='create_product_flutter'),
 ]

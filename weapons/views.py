@@ -1,6 +1,7 @@
 import datetime
+import json
 from django.shortcuts import render, redirect
-from django.http import HttpResponseNotFound, HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseNotFound, HttpResponseRedirect, HttpResponse, JsonResponse
 from weapons.forms import WeaponForm
 from django.urls import reverse
 from weapons.models import Weapon
@@ -114,6 +115,23 @@ def add_weapon_ajax(request):
     return HttpResponseNotFound()
 
 
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+        
+        data = json.loads(request.body)
 
+        new_product = Weapon.objects.create(
+            user = request.user,
+            name = data["name"],
+            price = int(data["price"]),
+            description = data["description"]
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
 
 
