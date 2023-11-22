@@ -1,16 +1,23 @@
 import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login as auth_login
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.models import User
+from django.core import serializers
+
+
+from weapons.models import Weapon
+
+logged_user = None
 
 @csrf_exempt
 def login(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
+    logged_user = user
     if user is not None:
         if user.is_active:
             auth_login(request, user)
@@ -60,6 +67,12 @@ def register(request):
         password1 = user_data['password1']
         password2 = user_data['password2']
 
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({
+                "status": False,
+                "message": "Username sudah terdaftar."
+            }, status=400)
+    
         if password1 != password2:
             return JsonResponse({
             "status": False,
@@ -80,4 +93,7 @@ def register(request):
             "status": False,
             "message": "Register gagal"
         }, status=401)
-            
+
+def show_json(request):
+    data = Weapon.objects.filter(user = logged_user)
+    return HttpResponse(serializers.serialize('json', data))

@@ -80,9 +80,9 @@ def show_xml(request):
     data = Weapon.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
-@csrf_exempt
+@login_required(login_url='/login')
 def show_json(request):
-    data = Weapon.objects.all()
+    data = Weapon.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
