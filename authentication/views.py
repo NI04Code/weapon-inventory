@@ -1,8 +1,10 @@
+import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login as auth_login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.models import User
 
 @csrf_exempt
 def login(request):
@@ -47,3 +49,35 @@ def logout(request):
         "status": False,
         "message": "Logout gagal."
         }, status=401)
+    
+@csrf_exempt
+def register(request):
+
+    if request.method == "POST":
+        user_data = json.loads(request.body)
+        
+        username = user_data['username']
+        password1 = user_data['password1']
+        password2 = user_data['password2']
+
+        if password1 != password2:
+            return JsonResponse({
+            "status": False,
+            "message": "Register gagal, password confirmation failed"
+        }, status=401)
+
+        user = User.objects.create_user(username = username, password = password1)
+        user.save()
+
+        return JsonResponse({
+            "status": True,
+            "message": "Register sukses!"
+            # Tambahkan data lainnya jika ingin mengirim data ke Flutter.
+        }, status=200)
+    
+    else:
+        return JsonResponse({
+            "status": False,
+            "message": "Register gagal"
+        }, status=401)
+            

@@ -80,6 +80,7 @@ def show_xml(request):
     data = Weapon.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
+@csrf_exempt
 def show_json(request):
     data = Weapon.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
@@ -124,8 +125,11 @@ def create_product_flutter(request):
         new_product = Weapon.objects.create(
             user = request.user,
             name = data["name"],
-            price = int(data["price"]),
-            description = data["description"]
+            amount = int(data["amount"]),
+            atk = int(data["atk"]),
+            critdmg = int(data["critdmg"]),
+            critrate = int(data["critrate"]),
+            description = data["description"],
         )
 
         new_product.save()
